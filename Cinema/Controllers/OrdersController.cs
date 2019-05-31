@@ -140,8 +140,10 @@ namespace Cinema.Controllers
         //[HttpDelete]
         public ActionResult DeleteOrders(string id)//[FromBody]int id)
         {
-            _orderService.DeleteOrder(Convert.ToInt32(id));            
+            _orderService.DeleteOrder(Convert.ToInt32(id));
+            //return RedirectToAction("UserOrders","Booking") ;
             return Ok();
+
         }
 
         //private bool OrdersExists(int id)

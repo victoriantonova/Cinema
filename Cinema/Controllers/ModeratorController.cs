@@ -7,6 +7,7 @@ using Cinema.Models;
 using Cinema.SL.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace Cinema.Controllers
 {
@@ -23,40 +24,52 @@ namespace Cinema.Controllers
         }
 
         [Authorize(Roles = "Moderator")]
-        public IActionResult Index(int? cinemaId, int? filmId)
+        public IActionResult Index()
         {
-            List<FilmsVM> films = new List<FilmsVM>();
-            List<CinemasVM> cinemas = new List<CinemasVM>();
+            SelectList films = new SelectList(_filmsService.GetAll(), "Id", "Name");
+            ViewBag.Films = films;
 
-            if (cinemaId.HasValue)
-            {
-                cinemas.AddRange(ViewBag.Cinemas);
-            }
-            else
-            {
-                cinemas = _cinemasService.GetAll();
-                ViewBag.Cinemas = cinemas;
-            }
+            SelectList cinemas = new SelectList(_cinemasService.GetAll(), "Id", "Name");
+            ViewBag.Cinemas = cinemas;
 
-            if (filmId.HasValue)
-            {
-                films.AddRange(ViewBag.Films);
-            }
-            else
-            {
-                films = _filmsService.GetAll();
-                ViewBag.Films = films;
-            }
-
-            SeancesViewModel seancesViewModel = new SeancesViewModel
-            {
-                CurrentCinemaId = cinemaId,
-                CurrentFilmId = filmId,
-                Cinemas = cinemas,
-                Films = films
-            };
-
-            return View(seancesViewModel);
+            return View();
         }
+
+        //[Authorize(Roles = "Moderator")]
+        //public IActionResult Index(int? cinemaId, int? filmId)
+        //{
+        //    List<FilmsVM> films = new List<FilmsVM>();
+        //    List<CinemasVM> cinemas = new List<CinemasVM>();
+
+        //    if (cinemaId.HasValue)
+        //    {
+        //        cinemas.AddRange(ViewBag.Cinemas);
+        //    }
+        //    else
+        //    {
+        //        cinemas = _cinemasService.GetAll();
+        //        ViewBag.Cinemas = cinemas;
+        //    }
+
+        //    if (filmId.HasValue)
+        //    {
+        //        films.AddRange(ViewBag.Films);
+        //    }
+        //    else
+        //    {
+        //        films = _filmsService.GetAll();
+        //        ViewBag.Films = films;
+        //    }
+
+        //    SeancesViewModel seancesViewModel = new SeancesViewModel
+        //    {
+        //        CurrentCinemaId = cinemaId,
+        //        CurrentFilmId = filmId,
+        //        Cinemas = cinemas,
+        //        Films = films
+        //    };
+
+        //    return View(seancesViewModel);
+        //}
     }
 }

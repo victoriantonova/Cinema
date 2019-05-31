@@ -145,10 +145,10 @@ namespace Cinema.DAL
             }
         }
 
-        //public void Save()
-        //{
-        //    db.SaveChanges();
-        //}
+        public void Save()
+        {
+            db.SaveChanges();
+        }
 
         //private bool disposed = false;
 

@@ -71,7 +71,7 @@ namespace Cinema.DAL.Repositories
             //_context.Entry(seance).State = EntityState.Added;
             //return _context.SaveChangesAsync();
             _context.Seances.Add(seance);
-            _context.SaveChanges();
+            //_context.SaveChanges();
         }
 
         public void Update(Seances seance)

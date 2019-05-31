@@ -16,35 +16,38 @@
 <script src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.37/js/bootstrap-datetimepicker.min.js"></script>
 
 
-<form class="form-inline" method="post">
+<form class="form-inline" method="post" action="https://localhost:44319/api/Seances">
     <label>Выберите кинотеатр:</label>
-    @Html.HiddenFor(svm => svm.CurrentCinemaId)
-    @Html.HiddenFor(svm => svm.CurrentFilmId)
-    <select name="CurrentCinemaId" class="form-control">
-        <option value="-1">Не выбрано</option>
-        @foreach (CinemasVM cinema in Model.Cinemas)
-        {
-            bool selected = Model.CurrentCinemaId.HasValue && Model.CurrentCinemaId.Value == cinema.Id;
+    @*@Html.HiddenFor(svm => svm.CurrentCinemaId)
+    @Html.HiddenFor(svm => svm.CurrentFilmId)*@
+    @*<select name="CurrentCinemaId" class="form-control">
+            <option value="-1">Не выбрано</option>
+            @foreach (CinemasVM cinema in Model.Cinemas)
+            {
+                bool selected = Model.CurrentCinemaId.HasValue && Model.CurrentCinemaId.Value == cinema.Id;
 
-            <option value="@cinema.Id" selected="@selected">@cinema.Name</option>
-        }
-    </select>
+                <option value="@cinema.Id" selected="@selected">@cinema.Name</option>
+            }
+        </select>*@
+    @Html.DropDownListFor(x => x.IdFilm, ViewBag.Films as SelectList, "Не выбрано")
     <label>Выберите фильм:</label>
-    <select name="CurrentFilmId" class="form-control">
-        <option value="-1">Не выбрано</option>
-        @foreach (FilmsVM film in Model.Films)
-        {
-            bool selected = Model.CurrentFilmId.HasValue && Model.CurrentFilmId.Value == film.Id;
-            <option value="@film.Id" selected="@selected">@film.Name</option>
-        }
-    </select>
+    @Html.DropDownListFor(x => x.IdCinema, ViewBag.Cinemas as SelectList, "Не выбрано")
+
+    @*<select name="CurrentFilmId" class="form-control">
+            <option value="-1">Не выбрано</option>
+            @foreach (FilmsVM film in Model.Films)
+            {
+                bool selected = Model.CurrentFilmId.HasValue && Model.CurrentFilmId.Value == film.Id;
+                <option value="@film.Id" selected="@selected">@film.Name</option>
+            }
+        </select>*@
 
     <div class="container">
         <div class="row">
             <div class='col-sm-6'>
                 <div class="form-group">
                     <div class='input-group date' id='datetimepicker1'>
-                        <input type='text' class="form-control" />
+                        <input type='text' name="DateSeance" class="form-control" />
                         <span class="input-group-addon">
                             <span class="glyphicon glyphicon-calendar"></span>
                         </span>
@@ -64,7 +67,7 @@
             <div class='col-sm-6'>
                 <div class="form-group">
                     <div class='input-group date' id='datetimepicker2'>
-                        <input type='text' class="form-control" />
+                        <input type='text' name="TimeSeance" class="form-control" />
                         <span class="input-group-addon">
                             <span class="glyphicon glyphicon-calendar"></span>
                         </span>
@@ -74,13 +77,13 @@
         </div>
     </div>
 
-    <input type="text"/>
+    <input type="text" name="Price"/>
     <button class="btn btn_color" type="submit">Создать</button>
 </form>
 
 <script>
     $("#datetimepicker1").datetimepicker({
-        format: 'DD-MM-YYYY'
+        format: 'YYYY-MM-DD'
     });
 
     $("#datetimepicker2").datetimepicker({

@@ -93,7 +93,7 @@ namespace Cinema.Controllers
 
         // POST: api/Seances
         [HttpPost]
-        public async Task<ActionResult> PostSeances([FromBody] Seances seances)
+        public ActionResult PostSeances([FromForm] Seances seances)
         {
             if (seances == null)
             {
@@ -101,7 +101,7 @@ namespace Cinema.Controllers
             }
             else
             {
-                await Task.Run(() => _seanceService.CreateSeance(seances));
+                _seanceService.CreateSeance(seances);
                 return Ok(seances);
             }
         }

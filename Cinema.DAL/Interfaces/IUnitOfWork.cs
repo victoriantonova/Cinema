@@ -30,6 +30,6 @@ namespace Cinema.DAL.Interfaces
         IRepository<SeatsBusy> SeatsBusy { get; }
 
 
-      //  void Save();
+        void Save();
     }
 }

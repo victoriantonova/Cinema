@@ -58,7 +58,7 @@ namespace Cinema.DAL.Repositories
         public void Create(SeatsBusy seat_busy)
         {
             db.Entry(seat_busy).State = EntityState.Added;
-            db.SaveChanges();
+            //db.SaveChanges();
         }
 
         public void Update(SeatsBusy seat_busy)

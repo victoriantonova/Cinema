@@ -104,101 +104,49 @@ namespace Cinema.SL.Services
 
         public void CreateSeance(Seances seances)
         {
-            //DateTime date = new DateTime();
             DateTime date = DateTime.Now;
-            //var cinemaRes = _unitOfWork.Cinemas.GetCount(seances.IdCinema);
             var seats = _unitOfWork.Cinemas.Get(seances.IdCinema).CountSeats;
             if (seats != 0)
             {
 
-                //TimeSpan hour = TimeSpan.FromTicks();
                 Seances seance = new Seances();
                 var datas = _unitOfWork.Films.Get(seances.IdFilm);
-                if (seances.DateSeance.Year >= datas.DateStart.Year && seances.DateSeance.Year <= datas.DateEnd.Year)
+                if (seances.DateSeance >= datas.DateStart && seances.DateSeance <= datas.DateEnd)
+
                 {
-                    if (seances.DateSeance.Month > datas.DateStart.Month && seances.DateSeance.Month < datas.DateEnd.Month)
                     {
-                        if (seances.DateSeance.Year >= date.Year)
+                        seance.IdCinema = seances.IdCinema;
+                        seance.IdFilm = seances.IdFilm;
+                        seance.DateSeance = seances.DateSeance;
+                        seance.TimeSeance = seances.TimeSeance;
+                        seance.Price = seances.Price;
+                        seance.Count_Seats = seats;
+                        seance.AllSeats = seats;
+                        _unitOfWork.Seances.Create(seance);
+                        _unitOfWork.Save();
+
+                        var thisseance = _unitOfWork.Seances.GetAll().Where(x => x.IdCinema.Equals(seances.IdCinema) && x.IdFilm.Equals(seances.IdFilm) && x.DateSeance.Equals(seances.DateSeance) && x.TimeSeance.Equals(seances.TimeSeance)).FirstOrDefault();
+                        if (thisseance.Id != 0)
                         {
-                            if (seances.DateSeance.Month >= date.Month)
+                            var COUNTSEATS = _unitOfWork.Seances.Get(thisseance.Id).AllSeats;
+
+                            int i = 1;
+                            if (thisseance.Id != 0)
                             {
-                                if (seances.DateSeance.Day >= date.Day)
+                                for (i = 1; i <= COUNTSEATS; i++)
                                 {
-                                    {
-                                        seance.IdCinema = seances.IdCinema;
-                                        seance.IdFilm = seances.IdFilm;
-                                        seance.DateSeance = seances.DateSeance;
-                                        seance.TimeSeance = seances.TimeSeance;
-                                        seance.Price = seances.Price;
-                                        seance.Count_Seats = seats;
-                                        seance.AllSeats = seats;
-                                        _unitOfWork.Seances.Create(seance);
 
-                                        var thisseance = _unitOfWork.Seances.GetAll().Where(x => x.IdCinema.Equals(seances.IdCinema) && x.IdFilm.Equals(seances.IdFilm) && x.DateSeance.Equals(seances.DateSeance) && x.TimeSeance.Equals(seances.TimeSeance)).FirstOrDefault();
-                                        if (thisseance.Id != 0)
-                                        {
-                                            var COUNTSEATS = _unitOfWork.Seances.Get(thisseance.Id).AllSeats;
-
-                                            int i = 1;
-                                            if (thisseance.Id != 0)
-                                            {
-                                                for (i = 1; i <= COUNTSEATS; i++)
-                                                {
-
-                                                    _seatsBusyService.CreateSeatBusy(thisseance.Id, i);
-                                                }
-                                            }
-                                        }
-                                    }
+                                    _seatsBusyService.CreateSeatBusy(thisseance.Id, i);                                    
                                 }
+
                             }
-                        }
-                        else throw new Exception("sdsgh");
-                    }
-
-                    else if (seances.DateSeance.Month == datas.DateStart.Month)
-                    {
-                        if (seances.DateSeance.Day >= datas.DateStart.Day)
-                        {
-                            if (seances.DateSeance.Year >= date.Year)
-                            {
-                                if (seances.DateSeance.Month >= date.Month)
-                                {
-                                    if (seances.DateSeance.Day >= date.Day)
-                                    {
-                                        seance.IdCinema = seances.IdCinema;
-                                        seance.IdFilm = seances.IdFilm;
-                                        seance.DateSeance = seances.DateSeance;
-                                        seance.TimeSeance = seances.TimeSeance;
-                                        seance.Price = seances.Price;
-                                        seance.Count_Seats = seats;
-                                        seance.AllSeats = seats;
-                                        _unitOfWork.Seances.Create(seance);
-
-                                        var thisseance = _unitOfWork.Seances.GetAll().Where(x => x.IdCinema.Equals(seances.IdCinema) && x.IdFilm.Equals(seances.IdFilm) && x.DateSeance.Equals(seances.DateSeance) && x.TimeSeance.Equals(seances.TimeSeance)).FirstOrDefault();
-                                        if (thisseance.Id != 0)
-                                        {
-                                            var COUNTSEATS = _unitOfWork.Seances.Get(thisseance.Id).AllSeats;
-
-                                            int i = 1;
-                                            if (thisseance.Id != 0)
-                                            {
-                                                for (i = 1; i <= COUNTSEATS; i++)
-                                                {
-                                                    _seatsBusyService.CreateSeatBusy(thisseance.Id, i);
-                                                }
-
-                                            }
-                                        }
-                                    }
-                                }
-                            }
+                            else throw new Exception("sdsgh");
                         }
                     }
-                    else throw new Exception("sdsgh");
                 }
             }
         }
+        
 
 
 

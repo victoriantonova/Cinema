@@ -68,6 +68,7 @@ namespace Cinema.SL.Services
             seatsbusy.IdSeatbusy = entered_idseat;
             seatsbusy.Isbusy = false;
             _unitOfWork.SeatsBusy.Create(seatsbusy);
+            _unitOfWork.Save();
         }
         public void UpdateSeatBusy(int entered_idseance, int entered_idseat, bool isbusy)
         {
