@@ -1,0 +1,92 @@
+﻿@model SeancesViewModel
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+@*<link href="https://stackpath.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" />
+<script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>*@
+<link href="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.css" rel="stylesheet" />
+<link href="//cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.37/css/bootstrap-datetimepicker.css" rel="stylesheet" />
+
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.15.2/moment.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.37/js/bootstrap-datetimepicker.min.js"></script>
+
+
+<form class="form-inline" method="post">
+    <label>Выберите кинотеатр:</label>
+    @Html.HiddenFor(svm => svm.CurrentCinemaId)
+    @Html.HiddenFor(svm => svm.CurrentFilmId)
+    <select name="CurrentCinemaId" class="form-control">
+        <option value="-1">Не выбрано</option>
+        @foreach (CinemasVM cinema in Model.Cinemas)
+        {
+            bool selected = Model.CurrentCinemaId.HasValue && Model.CurrentCinemaId.Value == cinema.Id;
+
+            <option value="@cinema.Id" selected="@selected">@cinema.Name</option>
+        }
+    </select>
+    <label>Выберите фильм:</label>
+    <select name="CurrentFilmId" class="form-control">
+        <option value="-1">Не выбрано</option>
+        @foreach (FilmsVM film in Model.Films)
+        {
+            bool selected = Model.CurrentFilmId.HasValue && Model.CurrentFilmId.Value == film.Id;
+            <option value="@film.Id" selected="@selected">@film.Name</option>
+        }
+    </select>
+
+    <div class="container">
+        <div class="row">
+            <div class='col-sm-6'>
+                <div class="form-group">
+                    <div class='input-group date' id='datetimepicker1'>
+                        <input type='text' class="form-control" />
+                        <span class="input-group-addon">
+                            <span class="glyphicon glyphicon-calendar"></span>
+                        </span>
+                    </div>
+                </div>
+            </div>
+            @*<script type="text/javascript">
+                    $(function () {
+                        $('#datetimepicker1').data("DateTimePicker")//.datetimepicker();
+                    });
+                </script>*@
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="row">
+            <div class='col-sm-6'>
+                <div class="form-group">
+                    <div class='input-group date' id='datetimepicker2'>
+                        <input type='text' class="form-control" />
+                        <span class="input-group-addon">
+                            <span class="glyphicon glyphicon-calendar"></span>
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <input type="text"/>
+    <button class="btn btn_color" type="submit">Создать</button>
+</form>
+
+<script>
+    $("#datetimepicker1").datetimepicker({
+        format: 'DD-MM-YYYY'
+    });
+
+    $("#datetimepicker2").datetimepicker({
+        format: 'HH:mm'
+    });
+
+
+
+</script>

@@ -1,0 +1,52 @@
+﻿@{
+    ViewData["Title"] = "Index";
+    int seanceId = Convert.ToInt32(ViewData["Id"]);
+}
+
+@model IEnumerable<SeatsBusy>
+
+<link href="https://stackpath.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" />
+<script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
+
+<div class="container-fluid">
+    @for (int i = 0; i < Model.Count() / 10; i++)
+    {
+        <div class="row justify-content-center">
+            @foreach (var seat in Model.Skip(i * 10).Take(10))
+            {
+                var color = seat.Isbusy ? "yellow" : "lightgreen";
+                <div style="display:line; margin: 20px; flex-direction: row; flex-wrap: wrap; width: 50px; background-color: @color ">
+
+                    <div class="valueDiv addclass" style=" width: 50px; height: 50px;">
+                        <input type="hidden" id=`IdSeance${@seat.IdSeatbusy}` value="@seat.IdSeance"/>
+                        <button class="btn" id="@seat.IdSeatbusy" style="width:100%; height: 100%; background: transparent; border: none; color: brown;" disabled="@seat.Isbusy">@seat.IdSeatbusy</button>
+                    </div>
+                </div>
+            }
+        </div>
+    }
+</div>
+
+<script>
+    $(".btn").on("click", (e) => {
+        var body = {
+            IdSeat: e.target.id,
+            IdUser: `@UserHelper.IdUser`,
+            IdSeance: @seanceId
+        };
+
+        $.ajax({
+            url: 'https://localhost:44319/api/Orders',
+            type: 'POST',
+            data: JSON.stringify(body),
+            contentType: "application/json",
+            success: function (order) {
+                $(`#${e.target.id}`).parent().css("background-color", "yellow");
+            },
+            error: function (data) {
+
+            }
+        });
+    });
+    
+</script>

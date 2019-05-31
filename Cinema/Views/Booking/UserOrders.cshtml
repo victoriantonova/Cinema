@@ -1,0 +1,101 @@
+﻿
+@{
+    ViewData["Title"] = "UserOrders";
+    string userId = UserHelper.IdUser;
+}
+
+<h1>Orders</h1>
+
+@model List<OrdersInfoVM>
+
+<link href="https://stackpath.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" />
+<script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
+
+<table class="table" id="tableOrders">
+    <thead>
+        <tr>
+            <th>
+                Кинотеатр
+            </th>
+            <th>
+                Фильм
+            </th>
+            <th>Дата сеанса</th>
+            <th>Время сеанса</th>
+            <th>Номер места</th>
+            <th>Стоимость</th>
+        </tr>
+        @for (int i = 0; i < Model.Count(); i++)
+        {
+            @foreach(var order in Model)
+            {
+                <tr>
+                    <td>@order.CinemaName</td>
+                </tr>
+                <button class='btn' id="@order.OrderId"> Отменить заказ</button>
+            }
+        }
+    </thead>
+    <tbody></tbody>
+</table>
+
+<script>
+    //function GetOrders(iduser) {
+    //    $.ajax({
+    //        url: 'https://localhost:44319/api/orders/' + iduser,
+    //        type: 'GET',
+    //        contentType: "application/json",
+    //        success: function (orders) {
+    //            var rows = "";
+    //            orders.forEach(orders => {
+    //                console.log(orders);
+    //                rows += row(orders);
+    //            })
+    //            $("#tableOrders").append(rows);
+    //        }
+    //    });
+    //}
+
+    //var row = function (item) {
+
+    //    date = new Date(item.dateSeance);
+    //    year = date.getFullYear();
+    //    month = date.getMonth() + 1;
+    //    dt = date.getDate();
+
+    //    if (dt < 10) {
+    //        dt = '0' + dt;
+    //    }
+    //    if (month < 10) {
+    //        month = '0' + month;
+    //    }
+
+    //    var arr = ['января', 'февраля', 'марта', 'апреля', 'мая', 'июня', 'июля', 'августа', 'сентября', 'ноября', 'декабря'];
+
+    //    return "<tr data-rowid='" + item.id + "'><td>" + item.cinemaName + "</td>" +
+    //        "<td>" + item.filmName + "</td><td>" + dt + ' ' + arr[month - 1] + ' ' + year + "</td><td>" + item.timeSeance + "</td><td>"
+    //        + item.placeNumber + "</td><td>" + item.price + "</td><td><button class='btn' id='" + item.orderId +"'"+ " >" + "Отменить заказ" + "</button ></td></tr>";
+    //}
+
+     $(".btn").on("click", (e) => {
+        //var body = {
+        //    OrderId: e.target.id
+        //};
+         console.log("11111");
+
+         $.ajax({
+             url: 'https://localhost:44319/api/Orders/' + e.target.id,
+            type: 'DELETE',
+            //data: JSON.stringify(body),
+            contentType: "application/json",
+            success: function (order) {
+                console.log("delete");
+            },
+            error: function (data) {
+
+            }
+        });
+    });
+
+    GetOrders("@userId");
+</script>
