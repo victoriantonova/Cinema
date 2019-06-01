@@ -1,11 +1,9 @@
-﻿@{
-    ViewData["Title"] = "Home Page";
+﻿
+@model IEnumerable<ActorsOfFilmVM>
+@{
+    ViewData["Title"] = "Find Films";
 }
-
-<link href="https://stackpath.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" />
-<script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
-
-@Html.ActionLink("Поиск фильмов по актеру", "FindFilms", "Home", new { }, new { @class = "btn btn-prime" })
+<h1>@ViewData["Title"]</h1>
 
 <table class="table">
     <thead>
@@ -23,13 +21,31 @@
             <th>Длительность</th>
         </tr>
     </thead>
-    <tbody></tbody>
+    <tbody>
+        @foreach (var film in Model)
+        {
+        <tr>
+            <td>
+                @film.Films.Name
+            </td>
+            <td>
+                <img src=@film.Films.Img height=208 width=140/>
+            </td>
+            <td>
+                @film.Films.Description
+            </td>
+            <td>
+                @film.Films.Year
+            </td>
+            <td>
+                @film.Films.Duration
+            </td>
+        </tr>
+        }
+    </tbody>
 </table>
-@if (User.IsInRole("Moderator"))
-{
-    @Html.ActionLink("Создать сеанс", "Index", "Moderator", new { }, new { @class = "btn btn-prime" })
-}
-<script>
+
+@*<script>
     function GetFilms() {
         $.ajax({
             url: 'https://localhost:44319/api/filmsapi',
@@ -46,22 +62,6 @@
         });
     }
 
-    var row = function (item) {
-
-        date = new Date(item.dateStart);
-        year = date.getFullYear();
-        month = date.getMonth() + 1;
-        dt = date.getDate();
-
-        if (dt < 10) {
-            dt = '0' + dt;
-        }
-        if (month < 10) {
-            month = '0' + month;
-        }
-
-        var arr = ['января', 'февраля', 'марта', 'апреля', 'мая', 'июня', 'июля', 'августа', 'сентября', 'ноября', 'декабря'];
-
         return "<tr data-rowid='" + item.id + "'><td><a href = Home/Details/" + item.id + " >" + item.name + "</a></td>" +
             "<td><img src= " + item.img + " height=208 width=140/></td> <td>" + item.description + "</td><td>" + item.year +
             "</td><td>" + item.duration + ' минут' + "</td></tr>";
@@ -69,4 +69,4 @@
 
 
     GetFilms();
-</script>
+</script>*@

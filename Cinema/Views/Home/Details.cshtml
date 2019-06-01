@@ -265,7 +265,7 @@ else
 
     function GetActors(id) {
         $.ajax({
-            url: 'https://localhost:44319/api/ActorsOfFilmAPI/' + id,
+            url: 'https://localhost:44319/api/ActorsOfFilmAPI/Get/' + id,
             type: 'GET',
             contentType: "application/json",
             success: function (actors) {
@@ -279,8 +279,37 @@ else
     }
 
     var rowActor = function (item) {
-        return item.actors.name + " " + item.actors.surname + "<br>";
+        //return "<tr><td><a class='getActorLink' data-id='" + item.actors.id + "' >" + item.actors.name + " " + item.actors.surname + "</a></td></tr>";
+        return `<a class='getActorLink' data-id='${item.actors.id}' href='https://localhost:44319/Home/FindFilms?id=${item.actors.id}'>` +  item.actors.name + " " + item.actors.surname + "</a><br>";
     }
+
+    //function GetFilmsByActor(idactor) {
+    //    $.ajax({
+    //        url: 'https://localhost:44319/api/ActorsOfFilmAPI/GetFilms/' + idactor,
+    //        type: 'GET',
+    //        contentType: "application/json",
+    //        success: function (exam) {
+    //            //console.log(exam);
+    //            //var form = document.forms["examForm"];
+    //            //console.log(exam);
+    //            //form.elements["id"].value = exam.id;
+    //            //form.elements["Subject"].value = exam.subject;
+    //            //form.elements["Group"].value = exam.group;
+    //            //form.elements["Date"].value = exam.date;
+    //            //form.elements["Course"].value = exam.course;
+    //        },
+    //        error: function (xhr, ajaxOptions, thrownError) {
+    //            //alert(xhr.status);
+    //            //alert(thrownError);
+    //        }
+    //    });
+    //}
+
+    //$("body").on("click", ".getActorLink", function () {
+    //    var idactor = $(this).data("id");
+    //    GetFilmsByActor(idactor);
+    //    console.log("actors");
+    //})
 
     function GetSeances(id) {
         $.ajax({

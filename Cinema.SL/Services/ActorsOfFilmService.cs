@@ -87,5 +87,23 @@ namespace Cinema.SL.Services
 
             return result.FindAll(x => x.IdFilm == gfId);
         }
+        //------
+        public List<ActorsOfFilmVM> FindFilmssByIdActor(int actorId)
+        {
+            IEnumerable<ActorsOfFilm> films = _unitOfWork.ActorsOfFilm.GetAll();
+
+            MapperConfiguration filmConfig = new MapperConfiguration(cfg =>
+            {
+                cfg.CreateMap<ActorsOfFilm, ActorsOfFilmVM>();
+            });
+            IMapper filmMap = filmConfig.CreateMapper();
+
+            ICollection<ActorsOfFilmVM> images = filmMap.Map<IEnumerable<ActorsOfFilm>, ICollection<ActorsOfFilmVM>>(films);
+
+            List<ActorsOfFilmVM> result = new List<ActorsOfFilmVM>();
+            result.AddRange(images);
+
+            return result.FindAll(x => x.IdActor == actorId);
+        }
     }
 }

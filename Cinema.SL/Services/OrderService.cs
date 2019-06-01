@@ -88,19 +88,15 @@ namespace Cinema.SL.Services
         public void DeleteOrder(int id)
         {
             unitOfWork.Orders.Delete(id);
+
+           // _seanceService.SeatDecrement(orders.IdSeance);
+
+            //_seatsBusyService.UpdateSeatBusy(orders.IdSeance, orders.IdSeat, true);
         }
         public void CreateOrder(Orders orders)
         {
-            /*
-             * Entered_Username Nvarchar2, Entered_Seance Number, Entered_Seat Number, Entered_Paid Nvarchar2, Ress Out Nvarchar2)
-End  Client_Procedures;
-
-             */
-            //_userService.USERNAME
             Orders order = new Orders();
 
-            //if (_seanceService.OverdueSeance(orders.id_seance) == false)
-            //{
             if (_seanceService.CountSeats(orders.IdSeance) != 0)
             {
                 if (_seatsBusyService.IsSeatBusy(orders.IdSeance, orders.IdSeat) == false)

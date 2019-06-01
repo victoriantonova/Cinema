@@ -10,5 +10,6 @@ namespace Cinema.SL.Interfaces
         List<ActorsOfFilmVM> GetAll();
         ActorsOfFilmVM FindById(int gfId);
         List<ActorsOfFilmVM> FindActorsByIdFilm(int gfId);
+        List<ActorsOfFilmVM> FindFilmssByIdActor(int actorId);
     }
 }

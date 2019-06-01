@@ -102,6 +102,13 @@ namespace Cinema.SL.Services
             //return result.Count_Seats;
         }
 
+        public void SeatIncrement(int entered_idseance)
+        {
+            var datas = _unitOfWork.Seances.Get(entered_idseance);
+            datas.Count_Seats = datas.Count_Seats + 1;
+            _unitOfWork.Seances.Update(datas);
+        }
+
         public void CreateSeance(Seances seances)
         {
             DateTime date = DateTime.Now;
@@ -138,7 +145,6 @@ namespace Cinema.SL.Services
 
                                     _seatsBusyService.CreateSeatBusy(thisseance.Id, i);                                    
                                 }
-
                             }
                             else throw new Exception("sdsgh");
                         }

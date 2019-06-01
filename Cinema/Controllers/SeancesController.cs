@@ -102,7 +102,7 @@ namespace Cinema.Controllers
             else
             {
                 _seanceService.CreateSeance(seances);
-                return Ok(seances);
+                return RedirectToAction("Index", "Moderator");
             }
         }
 

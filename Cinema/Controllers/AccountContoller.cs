@@ -125,7 +125,7 @@ namespace Cinema.Controllers
     public async Task<IActionResult> Logout()
     {
         await _signInManager.SignOutAsync();
-        UserHelper.IdUser = null;
+        UserHelper.IdUser = null;            
         return RedirectToAction("Login", "Account");
     }
 
