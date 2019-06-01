@@ -28,18 +28,8 @@ namespace Cinema.SL.Services
             return unitOfWork.Orders.GetAll().Where(ids => ids.IdSeance.Equals(entered_idseance));
         }
 
-        //public IEnumerable<Orders> postOrders(string username)
         public IEnumerable<Orders> GetUserOrders(string username)
         {
-            //if (_userService.WhatRoleOfUser(username).Equals(Role.ADMIN))
-            //{
-            //    return unitOfWork.Orders.GetAll();
-            //}
-            //else if (_userService.WhatRoleOfUser(username).Equals(Role.CLIENT))
-            //{
-            //    return unitOfWork.Orders.GetAll().Where(u => u.username.Equals(username));
-            //}
-            //else return unitOfWork.Orders.GetAll();
             return unitOfWork.Orders.GetAll().Where(idU => idU.IdUser.Equals(username));
         }
 
@@ -48,20 +38,11 @@ namespace Cinema.SL.Services
             return unitOfWork.Orders.GetAll().Where(u => u.IdUser.Equals(username));
         }
         public IEnumerable<Orders> getOrders()
-        {
-            //if (_userService.WhatRoleOfUser(_userService.USERNAME) == Role.ADMIN)
-            //{
+        {            
             return unitOfWork.Orders.GetAll();
-            //}
-            //else if (_userService.WhatRoleOfUser(_userService.USERNAME) == Role.CLIENT)
-            //{
-            //    return unitOfWork.Orders.GetAll().Where(u => u.username.Equals(_userService.USERNAME));
-            //}
-            //else throw new Exception("Нет прав доступа");
         }
         public IEnumerable<Orders> getOrdersId(string iduser)
         {
-            //return unitOfWork.Orders.GetAll().Where(x=>x.IdUser.Equals(iduser));
             return unitOfWork.Orders.GetAll().Where(r=>r.IdUser.Equals(iduser));
         }
 
@@ -75,7 +56,6 @@ namespace Cinema.SL.Services
             }
             else return false;
         }
-
 
         public void UpdateOrder(int id)
         {

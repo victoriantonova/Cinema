@@ -112,23 +112,24 @@ namespace Cinema.SL.Services
         public void CreateSeance(Seances seances)
         {
             DateTime date = DateTime.Now;
-            var seats = _unitOfWork.Cinemas.Get(seances.IdCinema).CountSeats;
-            if (seats != 0)
+            var seats = _unitOfWork.Cinemas.Get(seances.IdCinema);
+            if (seats.CountSeats != 0)
             {
-
                 Seances seance = new Seances();
                 var datas = _unitOfWork.Films.Get(seances.IdFilm);
                 if (seances.DateSeance >= datas.DateStart && seances.DateSeance <= datas.DateEnd)
-
                 {
+                    var seancesInCinema = _unitOfWork.Seances.GetAll().Where(x => x.IdCinema.Equals(seats.Id) && x.DateSeance.Equals(seances.DateSeance)).FirstOrDefault();
+
+                    if (seancesInCinema == null)
                     {
                         seance.IdCinema = seances.IdCinema;
                         seance.IdFilm = seances.IdFilm;
                         seance.DateSeance = seances.DateSeance;
                         seance.TimeSeance = seances.TimeSeance;
                         seance.Price = seances.Price;
-                        seance.Count_Seats = seats;
-                        seance.AllSeats = seats;
+                        seance.Count_Seats = seats.CountSeats;
+                        seance.AllSeats = seats.CountSeats;
                         _unitOfWork.Seances.Create(seance);
                         _unitOfWork.Save();
 
@@ -148,16 +149,13 @@ namespace Cinema.SL.Services
                             }
                             else throw new Exception("sdsgh");
                         }
+                        else throw new Exception("кинотеатр занят");
                     }
                 }
+                else throw new Exception("err date");
             }
         }
         
-
-
-
-
-        //public Seances getInfoAboutSeanceandFilm(int id_busy)
         public Seances getInfoAboutSeanceandFilm(int id)
         {
             //var seance = _unitOfWork.SeatsBusy.GetIdBusy(id_busy).Result.Id_Seance;
