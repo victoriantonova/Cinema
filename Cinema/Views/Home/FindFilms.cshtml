@@ -1,5 +1,4 @@
-﻿
-@model IEnumerable<ActorsOfFilmVM>
+﻿@model IEnumerable<ActorsOfFilmVM>
 @{
     ViewData["Title"] = "Find Films";
 }
@@ -44,29 +43,3 @@
         }
     </tbody>
 </table>
-
-@*<script>
-    function GetFilms() {
-        $.ajax({
-            url: 'https://localhost:44319/api/filmsapi',
-            type: 'GET',
-            contentType: "application/json",
-            success: function (films) {
-                var rows = "";
-                films.forEach(films => {
-                    console.log(films);
-                    rows += row(films);
-                })
-                $("table tbody").append(rows);
-            }
-        });
-    }
-
-        return "<tr data-rowid='" + item.id + "'><td><a href = Home/Details/" + item.id + " >" + item.name + "</a></td>" +
-            "<td><img src= " + item.img + " height=208 width=140/></td> <td>" + item.description + "</td><td>" + item.year +
-            "</td><td>" + item.duration + ' минут' + "</td></tr>";
-    }
-
-
-    GetFilms();
-</script>*@

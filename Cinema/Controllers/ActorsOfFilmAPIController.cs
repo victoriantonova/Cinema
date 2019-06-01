@@ -30,17 +30,13 @@ namespace Cinema.Controllers
         [HttpGet("{id}")]
         public ActionResult<IEnumerable<ActorsOfFilmVM>> Get(int id)
         {
-            //return _genresOfFilmService.FindById(id);
-
             return _actorsOfFilmService.FindActorsByIdFilm(id);
         }
 
-        //[Route("api/ActorsOfFilmApi/{idactor}")]
+
         [HttpGet("{idactor}")]
         public ActionResult<IEnumerable<ActorsOfFilmVM>> GetFilms(int idactor)
         {
-            // return _actorsOfFilmService.FindFilmssByIdActor(idactor);
-            // RedirectToAction("FindFilms", "Home");
             return _actorsOfFilmService.FindFilmssByIdActor(idactor);
 
         }

@@ -79,7 +79,6 @@ namespace Cinema.SL.Services
 
         public void UpdateOrder(int id)
         {
-
             var datas = unitOfWork.Orders.GetAll().Where(i => i.Id.Equals(id)).FirstOrDefault();
             datas.Ispaid = true;
             unitOfWork.Orders.Update(datas);
@@ -87,11 +86,10 @@ namespace Cinema.SL.Services
 
         public void DeleteOrder(int id)
         {
+            var datas = unitOfWork.Orders.GetAll().Where(i => i.Id.Equals(id)).FirstOrDefault();            
             unitOfWork.Orders.Delete(id);
-
-           // _seanceService.SeatDecrement(orders.IdSeance);
-
-            //_seatsBusyService.UpdateSeatBusy(orders.IdSeance, orders.IdSeat, true);
+            _seanceService.SeatIncrement(datas.IdSeance);
+            _seatsBusyService.UpdateSeatBusy(datas.IdSeance, datas.IdSeat, false);
         }
         public void CreateOrder(Orders orders)
         {

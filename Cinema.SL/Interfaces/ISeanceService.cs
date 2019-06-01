@@ -17,6 +17,7 @@ namespace Cinema.SL.Interfaces
         void deleteSeance(int id);
         int CountSeats(int entered_idseance);
         void SeatDecrement(int entered_idseance);
+        void SeatIncrement(int entered_idseance);
         void CreateSeance(Seances seances);
         Seances getInfoAboutSeanceandFilm(int id_busy);
         bool OverdueSeance(int entered_idseance);

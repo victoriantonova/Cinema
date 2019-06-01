@@ -20,14 +20,6 @@
             <td class="post b-enent-post" valign="top">
                 <h1 class="title" itemprop="name" id="title"></h1>
 
-                @*<table id="myTable" width="100" cellspacing="0" border="0" class="movie_info" cellpadding="0">
-                    <tbody>
-                        <tr>
-                            <td class="date"></td>
-                        </tr>
-                    </tbody>
-                </table>*@
-
                 <p class="year"></p>
                 <p class="duration"></p>
 
@@ -279,37 +271,8 @@ else
     }
 
     var rowActor = function (item) {
-        //return "<tr><td><a class='getActorLink' data-id='" + item.actors.id + "' >" + item.actors.name + " " + item.actors.surname + "</a></td></tr>";
         return `<a class='getActorLink' data-id='${item.actors.id}' href='https://localhost:44319/Home/FindFilms?id=${item.actors.id}'>` +  item.actors.name + " " + item.actors.surname + "</a><br>";
     }
-
-    //function GetFilmsByActor(idactor) {
-    //    $.ajax({
-    //        url: 'https://localhost:44319/api/ActorsOfFilmAPI/GetFilms/' + idactor,
-    //        type: 'GET',
-    //        contentType: "application/json",
-    //        success: function (exam) {
-    //            //console.log(exam);
-    //            //var form = document.forms["examForm"];
-    //            //console.log(exam);
-    //            //form.elements["id"].value = exam.id;
-    //            //form.elements["Subject"].value = exam.subject;
-    //            //form.elements["Group"].value = exam.group;
-    //            //form.elements["Date"].value = exam.date;
-    //            //form.elements["Course"].value = exam.course;
-    //        },
-    //        error: function (xhr, ajaxOptions, thrownError) {
-    //            //alert(xhr.status);
-    //            //alert(thrownError);
-    //        }
-    //    });
-    //}
-
-    //$("body").on("click", ".getActorLink", function () {
-    //    var idactor = $(this).data("id");
-    //    GetFilmsByActor(idactor);
-    //    console.log("actors");
-    //})
 
     function GetSeances(id) {
         $.ajax({

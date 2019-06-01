@@ -40,9 +40,6 @@ namespace Cinema.Controllers
         public IActionResult FindFilms(int? id)
         {
             var films = _actorsOfFilmService.FindFilmssByIdActor(id.Value);
-            //SelectList actors = new SelectList(_actorsService.GetAll(), "Id", "Name");
-            //ViewBag.Actors = actors;
-
             return View(films);
         }
     }

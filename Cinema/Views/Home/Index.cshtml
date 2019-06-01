@@ -5,8 +5,6 @@
 <link href="https://stackpath.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" />
 <script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
 
-@Html.ActionLink("Поиск фильмов по актеру", "FindFilms", "Home", new { }, new { @class = "btn btn-prime" })
-
 <table class="table">
     <thead>
         <tr>
@@ -66,7 +64,6 @@
             "<td><img src= " + item.img + " height=208 width=140/></td> <td>" + item.description + "</td><td>" + item.year +
             "</td><td>" + item.duration + ' минут' + "</td></tr>";
     }
-
 
     GetFilms();
 </script>

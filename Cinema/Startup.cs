@@ -110,13 +110,7 @@ namespace Cinema
             {
                 routes.MapRoute(
                     name: "default",
-                    template: "{controller=Home}/{action=Index}/{id?}");
-                routes.MapRoute(
-                    name: "actors",
-                    template: "{controller=ActorsOfFilm}/{action=Get}/{id?}");
-                //routes.MapRoute(
-                //    name: "filmsByActor",
-                //    template: "{controller=ActorsOfFilm}/{action=GetFilms}/{idactor?}");
+                    template: "{controller=Home}/{action=Index}/{id?}");                
             });
 
            
