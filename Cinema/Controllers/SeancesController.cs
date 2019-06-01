@@ -9,6 +9,7 @@ using Cinema.DAL;
 using Cinema.DAL.Model;
 using Cinema.SL.Interfaces;
 using Cinema.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Cinema.Controllers
 {
@@ -119,6 +120,7 @@ namespace Cinema.Controllers
         //}
 
         // POST: api/Seances
+        [Authorize(Roles = "Moderator")]
         [HttpPost]
         public ActionResult PostSeances([FromForm] Seances seances)
         {
@@ -127,6 +129,7 @@ namespace Cinema.Controllers
         }
 
         // DELETE: api/Seances/5
+        [Authorize(Roles = "Moderator")]
         [HttpDelete("{id}")]
         public void DeleteSeances(int id)
         {

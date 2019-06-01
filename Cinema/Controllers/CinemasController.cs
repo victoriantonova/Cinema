@@ -9,6 +9,7 @@ using Cinema.DAL;
 using Cinema.DAL.Model;
 using Cinema.SL.Interfaces;
 using Cinema.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Cinema.Controllers
 {
@@ -70,6 +71,7 @@ namespace Cinema.Controllers
         //}
 
         // POST: api/Cinemas
+        [Authorize]
         [HttpPost]
         public async Task<ActionResult> PostCinemas(Cinemas cinemas)
         {

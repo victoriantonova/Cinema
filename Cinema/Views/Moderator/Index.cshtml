@@ -104,6 +104,7 @@
             <th>Дата</th>
             <th>Время</th>
             <th>Цена</th>
+            <th></th>
         </tr>
     </tbody>
 </table>
@@ -228,7 +229,7 @@
 
         return "<tr data-rowid='" + item.id + "'><td>" +item.filmName+"</td><td>"+ item.cinemaName + "</td>" +
             "<td>" + item.countSeats + "</td> <td>" + dt + ' ' + arr[month - 1] + ' ' + year + "</td><td>" + item.timeSeance +
-            "</td><td>" + item.price + "</td><td><button class='btn' id='" + item.seanceId + "'" + " >" + "Удалить сеанс" + "</button ></td></tr>";
+            "</td><td>" + item.price + "</td><td><button class='btn btn-link' id='" + item.seanceId + "'" + " >" + "Удалить сеанс" + "</button ></td></tr>";
     }
 
     $("body").on("click", ".btn", (e) => {

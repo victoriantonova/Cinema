@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Cinema.Models;
 using Cinema.SL.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -32,7 +33,6 @@ namespace Cinema.Controllers
         {
             return _actorsOfFilmService.FindActorsByIdFilm(id);
         }
-
 
         [HttpGet("{idactor}")]
         public ActionResult<IEnumerable<ActorsOfFilmVM>> GetFilms(int idactor)

@@ -32,6 +32,7 @@ namespace Cinema.Controllers
         }
 
         // GET: api/Orders
+        [Authorize(Roles = "User")]
         [HttpGet]
         public IEnumerable<Orders> GetOrders()
         {
@@ -39,6 +40,7 @@ namespace Cinema.Controllers
         }
 
         // GET: api/Orders/iduser
+        [Authorize(Roles = "User")]
         [HttpGet("{iduser}")]
         public async Task<IActionResult> GetOrders(string iduser)
         {
@@ -76,7 +78,6 @@ namespace Cinema.Controllers
                     });
                 }
             }
-            //return Ok(orders);
             return Ok(ordersInfo);
         }
 
@@ -114,7 +115,7 @@ namespace Cinema.Controllers
         //}
 
         // POST: api/Orders
-        [Authorize]
+        [Authorize(Roles = "User")]
         [HttpPost]
         public async Task<ActionResult> PostOrder([FromBody] Orders order)
         {
@@ -136,8 +137,8 @@ namespace Cinema.Controllers
         }
 
         // DELETE: api/Orders/5
+        [Authorize(Roles = "User")]
         [HttpDelete("{id}")]
-        //[HttpDelete]
         public ActionResult DeleteOrders(string id)//[FromBody]int id)
         {
             _orderService.DeleteOrder(Convert.ToInt32(id));
@@ -145,10 +146,5 @@ namespace Cinema.Controllers
             return Ok();
 
         }
-
-        //private bool OrdersExists(int id)
-        //{
-        //    return _context.Orders.Any(e => e.Id == id);
-        //}
     }
 }

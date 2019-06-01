@@ -34,42 +34,5 @@ namespace Cinema.Controllers
 
             return View();
         }
-
-        //[Authorize(Roles = "Moderator")]
-        //public IActionResult Index(int? cinemaId, int? filmId)
-        //{
-        //    List<FilmsVM> films = new List<FilmsVM>();
-        //    List<CinemasVM> cinemas = new List<CinemasVM>();
-
-        //    if (cinemaId.HasValue)
-        //    {
-        //        cinemas.AddRange(ViewBag.Cinemas);
-        //    }
-        //    else
-        //    {
-        //        cinemas = _cinemasService.GetAll();
-        //        ViewBag.Cinemas = cinemas;
-        //    }
-
-        //    if (filmId.HasValue)
-        //    {
-        //        films.AddRange(ViewBag.Films);
-        //    }
-        //    else
-        //    {
-        //        films = _filmsService.GetAll();
-        //        ViewBag.Films = films;
-        //    }
-
-        //    SeancesViewModel seancesViewModel = new SeancesViewModel
-        //    {
-        //        CurrentCinemaId = cinemaId,
-        //        CurrentFilmId = filmId,
-        //        Cinemas = cinemas,
-        //        Films = films
-        //    };
-
-        //    return View(seancesViewModel);
-        //}
     }
 }

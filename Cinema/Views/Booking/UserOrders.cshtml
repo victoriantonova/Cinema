@@ -59,7 +59,7 @@
 
         return "<tr data-rowid='" + item.id + "'><td>" + item.cinemaName + "</td>" +
             "<td>" + item.filmName + "</td><td>" + dt + ' ' + arr[month - 1] + ' ' + year + "</td><td>" + item.timeSeance + "</td><td>"
-            + item.placeNumber + "</td><td>" + item.price + "</td><td><button class='btn' id='" + item.orderId +"'"+ " >" + "Отменить заказ" + "</button ></td></tr>";
+            + item.placeNumber + "</td><td>" + item.price + "</td><td><button class='btn btn-link' id='" + item.orderId +"'"+ " >" + "Отменить заказ" + "</button ></td></tr>";
     }
 
         $("body").on("click", ".btn", (e) => {

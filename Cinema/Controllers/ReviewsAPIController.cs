@@ -36,6 +36,7 @@ namespace Cinema.Controllers
             return _reviewsService.GetReviewsByIdFilm(id);
         }
 
+        [Authorize(Roles = "User")]
         [HttpPost]
         public void Post([FromBody]ReviewsVM value)
         {

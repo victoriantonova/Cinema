@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Cinema.SL.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Cinema.Controllers
@@ -12,12 +13,12 @@ namespace Cinema.Controllers
         private readonly ISeatsBusyService _seatBusyService;
         private readonly IOrderService _orderService;
 
-
         public BookingController(ISeatsBusyService seatsBusyService, IOrderService orderService)
         {
             _seatBusyService = seatsBusyService;
             _orderService = orderService;
         }
+
         public IActionResult Index(int id)
         {
             ViewData["Id"] = id;
@@ -25,6 +26,7 @@ namespace Cinema.Controllers
             return View(seatsBust);
         }
 
+        [Authorize(Roles = "User")]
         public IActionResult UserOrders(string id)
         {
             ViewData["Id"] = id;
