@@ -54,8 +54,15 @@ namespace Cinema.Controllers
                 {
                     UserHelper.IdUser = user.Id;
                     UserHelper.UserName = user.UserName;
-                    return RedirectToAction("Index", "Home");
-                }
+                        if (UserHelper.UserName == "moderator")
+                        {
+                            return RedirectToAction("Index", "Moderator");
+                        }
+                        else
+                        {
+                            return RedirectToAction("Index", "Home");
+                        }
+                    }
             }
 
             ModelState.AddModelError("", "Неверный Email или пароль");

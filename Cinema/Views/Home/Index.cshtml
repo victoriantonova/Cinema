@@ -23,10 +23,7 @@
     </thead>
     <tbody></tbody>
 </table>
-@if (User.IsInRole("Moderator"))
-{
-    @Html.ActionLink("Создать сеанс", "Index", "Moderator", new { }, new { @class = "btn btn-prime" })
-}
+
 <script>
     function GetFilms() {
         $.ajax({
