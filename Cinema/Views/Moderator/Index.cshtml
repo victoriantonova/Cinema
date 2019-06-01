@@ -228,8 +228,21 @@
 
         return "<tr data-rowid='" + item.id + "'><td>" +item.filmName+"</td><td>"+ item.cinemaName + "</td>" +
             "<td>" + item.countSeats + "</td> <td>" + dt + ' ' + arr[month - 1] + ' ' + year + "</td><td>" + item.timeSeance +
-            "</td><td>" + item.price + "</td> </td>";
+            "</td><td>" + item.price + "</td><td><button class='btn' id='" + item.seanceId + "'" + " >" + "Удалить сеанс" + "</button ></td></tr>";
     }
+
+    $("body").on("click", ".btn", (e) => {
+        $.ajax({
+            url: 'https://localhost:44319/api/Seances/' + e.target.id,
+            type: 'DELETE',
+            contentType: "application/json",
+            success: function (order) {
+                console.log("delete");
+            },
+            error: function (data) {
+            }
+        });
+    });
 
     GetSeances();
 </script>

@@ -71,10 +71,12 @@ namespace Cinema.SL.Services
             _unitOfWork.Seances.Update(datas);
         }
 
-        public void deleteSeance(int id)
+        public void DeleteSeance(int id)
         {
+            var datas = _unitOfWork.Seances.GetAll().Where(i => i.Id.Equals(id)).FirstOrDefault();
             _unitOfWork.Seances.Delete(id);
-                        _unitOfWork.Save();
+            _unitOfWork.Save();
+
 
             //var idseance = unitOfWork.Orders.GetSeance(id);
             //if (unitOfWork.Orders.GetSeance(id) != null)

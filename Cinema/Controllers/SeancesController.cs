@@ -133,21 +133,16 @@ namespace Cinema.Controllers
             }
         }
 
-        //    // DELETE: api/Seances/5
-        //    [HttpDelete("{id}")]
-        //    public async Task<ActionResult<Seances>> DeleteSeances(int id)
-        //    {
-        //        var seances = await _context.Seances.FindAsync(id);
-        //        if (seances == null)
-        //        {
-        //            return NotFound();
-        //        }
+        // DELETE: api/Seances/5
+        [HttpDelete("{id}")]
+        public ActionResult<Seances> DeleteSeances(int id)
+        {
+            _seanceService.DeleteSeance(Convert.ToInt32(id));
+            return RedirectToAction("Index","Moderator") ;
+        }
 
-        //        _context.Seances.Remove(seances);
-        //        await _context.SaveChangesAsync();
 
-        //        return seances;
-        //    }
+
 
         //    private bool SeancesExists(int id)
         //    {

@@ -15,7 +15,7 @@ namespace Cinema.SL.Interfaces
         Task<Seances> getBusyId(int entered_idseance);
         Seances getDateofSeance(int entered_idseance);
         void UpdateSeance(int id, Seances seance);
-        void deleteSeance(int id);
+        void DeleteSeance(int id);
         int CountSeats(int entered_idseance);
         void SeatDecrement(int entered_idseance);
         void SeatIncrement(int entered_idseance);
