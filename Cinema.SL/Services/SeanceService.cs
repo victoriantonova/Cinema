@@ -158,11 +158,6 @@ namespace Cinema.SL.Services
         
         public Seances getInfoAboutSeanceandFilm(int id)
         {
-            //var seance = _unitOfWork.SeatsBusy.GetIdBusy(id_busy).Result.Id_Seance;
-            ////var seance = _unitOfWork.SeatsBusy.GetAll().Where(x=>x.Id)IdBusy(id_busy).Result.Id_Seance;
-            ////return db.SeatsBusy.Where(i => i.Id.Equals(idbusy)).FirstOrDefaultAsync();
-            //var seance = _unitOfWork.SeatsBusy.GetAll().Where(x => x.Seances.Id.Equals())IdBusy(id_busy).Result.Id_Seance;
-
             var data = _unitOfWork.Seances.Get(id);
             return data;
         }

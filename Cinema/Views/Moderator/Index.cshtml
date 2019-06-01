@@ -16,36 +16,43 @@
 <script src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.37/js/bootstrap-datetimepicker.min.js"></script>
 
 
-<form class="form-inline" method="post" action="https://localhost:44319/api/Seances">
-    <label>Выберите кинотеатр:</label>
-    @*@Html.HiddenFor(svm => svm.CurrentCinemaId)
-    @Html.HiddenFor(svm => svm.CurrentFilmId)*@
-    @*<select name="CurrentCinemaId" class="form-control">
-            <option value="-1">Не выбрано</option>
-            @foreach (CinemasVM cinema in Model.Cinemas)
-            {
-                bool selected = Model.CurrentCinemaId.HasValue && Model.CurrentCinemaId.Value == cinema.Id;
+<form method="post" action="https://localhost:44319/api/Seances">
+    @*<div class="form-group">
+            <label>Выберите фильм:</label><br />
+            @Html.DropDownListFor(x => x.IdFilm, ViewBag.Films as SelectList, "Не выбрано")
+        </div>*@
+    <div class="container">
+        <div class="row">
+            <div class='col-sm-6'>
+                <div class="form-group">
+                    <label>Выберите фильм:</label><br />
+                    @Html.DropDownListFor(x => x.IdFilm, ViewBag.Films as SelectList, "Не выбрано")
+                </div>
+            </div>
+        </div>
+    </div>
 
-                <option value="@cinema.Id" selected="@selected">@cinema.Name</option>
-            }
-        </select>*@
-    @Html.DropDownListFor(x => x.IdFilm, ViewBag.Films as SelectList, "Не выбрано")
-    <label>Выберите фильм:</label>
-    @Html.DropDownListFor(x => x.IdCinema, ViewBag.Cinemas as SelectList, "Не выбрано")
-
-    @*<select name="CurrentFilmId" class="form-control">
-            <option value="-1">Не выбрано</option>
-            @foreach (FilmsVM film in Model.Films)
-            {
-                bool selected = Model.CurrentFilmId.HasValue && Model.CurrentFilmId.Value == film.Id;
-                <option value="@film.Id" selected="@selected">@film.Name</option>
-            }
-        </select>*@
+    @*<div class="form-group">
+        <label>Выберите кинотеатр:</label><br />
+        @Html.DropDownListFor(x => x.IdCinema, ViewBag.Cinemas as SelectList, "Не выбрано")
+    </div>*@
 
     <div class="container">
         <div class="row">
             <div class='col-sm-6'>
                 <div class="form-group">
+                    <label>Выберите кинотеатр:</label><br />
+                    @Html.DropDownListFor(x => x.IdCinema, ViewBag.Cinemas as SelectList, "Не выбрано")
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="row">
+            <div class='col-sm-6'>
+                <div class="form-group">
+                    <label>Введите дату сеанса:</label><br />
                     <div class='input-group date' id='datetimepicker1'>
                         <input type='text' name="DateSeance" class="form-control" />
                         <span class="input-group-addon">
@@ -54,11 +61,6 @@
                     </div>
                 </div>
             </div>
-            @*<script type="text/javascript">
-                    $(function () {
-                        $('#datetimepicker1').data("DateTimePicker")//.datetimepicker();
-                    });
-                </script>*@
         </div>
     </div>
 
@@ -66,6 +68,7 @@
         <div class="row">
             <div class='col-sm-6'>
                 <div class="form-group">
+                    <label>Введите время сеанса:</label><br />
                     <div class='input-group date' id='datetimepicker2'>
                         <input type='text' name="TimeSeance" class="form-control" />
                         <span class="input-group-addon">
@@ -77,8 +80,19 @@
         </div>
     </div>
 
-    <input type="text" name="Price"/>
-    <button class="btn btn_color" type="submit">Создать</button>
+    <div class="container">
+        <div class="row">
+            <div class='col-sm-6'>
+                <div class="form-group">
+                    <label>Введите цену:</label><br />
+                    <input type="text" class="form-control" name="Price" />
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <br>
+    <button class="btn" type="submit">Создать</button>
 </form>
 
 <script>
