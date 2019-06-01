@@ -8,6 +8,7 @@ namespace Cinema.SL.Interfaces
 {
     public interface ISeanceService
     {
+        IEnumerable<Seances> GetAllSeances();
         IEnumerable<Seances> getSeancesIds();
         Seances getInfofSeance(int id_seance);
         Task<Seances> getSeanceId(int entered_idseance);

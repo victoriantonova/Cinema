@@ -55,14 +55,13 @@ namespace Cinema.Controllers
                     UserHelper.IdUser = user.Id;
                     UserHelper.UserName = user.UserName;
                     return RedirectToAction("Index", "Home");
-                    //return Json(new { success = true });
                 }
             }
 
             ModelState.AddModelError("", "Неверный Email или пароль");
             ModelState.AddModelError("", "Подтвердите Email");
         }
-        return View();//View(model);
+        return View();
 
     }
 

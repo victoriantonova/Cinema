@@ -23,12 +23,15 @@ namespace Cinema.SL.Services
             _seatsBusyService = seatsBusyService;
         }
 
+        public IEnumerable<Seances> GetAllSeances()
+        {
+            return _unitOfWork.Seances.GetAll();
+        }
 
         public IEnumerable<Seances> getSeancesIds()
         {
             //return _unitOfWork.Seances.GetAllId();
             return _unitOfWork.Seances.GetAll();
-
         }
 
         //public IEnumerable<Seances> getSeances()
@@ -71,6 +74,8 @@ namespace Cinema.SL.Services
         public void deleteSeance(int id)
         {
             _unitOfWork.Seances.Delete(id);
+                        _unitOfWork.Save();
+
             //var idseance = unitOfWork.Orders.GetSeance(id);
             //if (unitOfWork.Orders.GetSeance(id) != null)
             //{
@@ -97,9 +102,6 @@ namespace Cinema.SL.Services
             var datas = _unitOfWork.Seances.Get(entered_idseance);
             datas.Count_Seats = datas.Count_Seats - 1;
             _unitOfWork.Seances.Update(datas);
-
-            //var result = _unitOfWork.Seances.Get(entered_idseance);
-            //return result.Count_Seats;
         }
 
         public void SeatIncrement(int entered_idseance)

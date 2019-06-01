@@ -28,11 +28,38 @@ namespace Cinema.Controllers
         }
 
         // GET: api/Seances
+        //[HttpGet]
+        //public IEnumerable<Seances> GetSeances()
+        //{
+        //    return _seanceService.getSeancesIds();
+        //}
+
         [HttpGet]
-        public IEnumerable<Seances> GetSeances()
+        public IEnumerable<SeanceInfo> GetSeances()
         {
-            return _seanceService.getSeancesIds();
+            List<SeanceInfo> seancei = new List<SeanceInfo>();
+            var seances = _seanceService.GetAllSeances().ToList();
+            foreach (Seances seance in seances)
+            {
+                var cinemasinfo = _cinemasService.getCinemaofSeance(seance.IdCinema);
+                var filmsinfo = _filmsService.getFilmofSeance(seance.IdFilm);
+
+                seancei.Add(new SeanceInfo
+                {
+                    SeanceId = seance.Id,
+                    CinemaId = seance.IdCinema,
+                    CinemaName = cinemasinfo.Name,
+                    FilmId = seance.IdFilm,
+                    FilmName = filmsinfo.Name,
+                    DateSeance = seance.DateSeance,
+                    TimeSeance = seance.TimeSeance,
+                    Price = seance.Price,
+                    CountSeats = seance.Count_Seats
+                });
+            }
+            return seancei;
         }
+
 
         // GET: api/Seances/5
         [HttpGet("{idfilm}")]

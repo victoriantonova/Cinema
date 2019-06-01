@@ -1,12 +1,13 @@
 ﻿@model SeancesViewModel
+
 @{
     ViewData["Title"] = "Index";
 }
 
-<h1>Index</h1>
+<h1>Создание сеанса</h1>
 
 @*<link href="https://stackpath.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" />
-<script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>*@
+    <script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>*@
 <link href="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.css" rel="stylesheet" />
 <link href="//cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.37/css/bootstrap-datetimepicker.css" rel="stylesheet" />
 
@@ -17,10 +18,6 @@
 
 
 <form method="post" action="https://localhost:44319/api/Seances">
-    @*<div class="form-group">
-            <label>Выберите фильм:</label><br />
-            @Html.DropDownListFor(x => x.IdFilm, ViewBag.Films as SelectList, "Не выбрано")
-        </div>*@
     <div class="container">
         <div class="row">
             <div class='col-sm-6'>
@@ -31,11 +28,6 @@
             </div>
         </div>
     </div>
-
-    @*<div class="form-group">
-        <label>Выберите кинотеатр:</label><br />
-        @Html.DropDownListFor(x => x.IdCinema, ViewBag.Cinemas as SelectList, "Не выбрано")
-    </div>*@
 
     <div class="container">
         <div class="row">
@@ -91,9 +83,108 @@
         </div>
     </div>
 
-    <br>
-    <button class="btn" type="submit">Создать</button>
+    <div class="container">
+        <div class="row">
+            <div class='col-sm-6'>
+                <div class="form-group">
+                    <button class="btn btn-primary" type="submit">Создать</button>
+                </div>
+            </div>
+        </div>
+    </div>
 </form>
+
+<h3>Сеансы</h3>
+<table id="seances" width="100" cellspacing="0" border="0" class="movie_info" cellpadding="0">
+    <tbody>
+        <tr>
+            <th>Фильм</th>
+            <th>Кинотеатр</th>
+            <th>Свободные места</th>
+            <th>Дата</th>
+            <th>Время</th>
+            <th>Цена</th>
+        </tr>
+    </tbody>
+</table>
+
+<style>
+
+    h1 {
+        display: block;
+        font-size: 2em;
+        font-weight: bold;
+    }
+
+    .image_wrapper {
+        width: 340px;
+        vertical-align: top;
+        padding-right: 20px;
+    }
+
+    table .b-event-post {
+        overflow: visible;
+        overflow-x: visible;
+        overflow-y: visible;
+    }
+
+    .b-event-post {
+        overflow: hidden;
+        max-width: 100%;
+        padding-right: 20px;
+        padding-left: 20px;
+    }
+
+    .post {
+        max-width: 66%;
+        font: 15px/25px Arial,Helvetica,sans-serif;
+        font-style: normal;
+        font-variant-ligatures: normal;
+        font-variant-caps: normal;
+        font-variant-numeric: normal;
+        font-variant-east-asian: normal;
+        font-weight: normal;
+        font-stretch: normal;
+        font-size: 15px;
+        line-height: 25px;
+        font-family: Arial, Helvetica, sans-serif;
+    }
+
+    .title {
+        padding-bottom: 10px;
+        vertical-align: baseline;
+    }
+
+    .movie_info {
+        width: 100%;
+        border: 0;
+        padding: 0;
+        border-spacing: 0;
+        border-collapse: collapse;
+        margin: 20px 0;
+        border-top: 1px solid #e6e6e6;
+        color: #666;
+        font: 13px/19px Arial,Helvetica,sans-serif;
+    }
+
+    .genre {
+        min-width: 80px;
+        padding: 0;
+        border-right: 1px solid #e6e6e6;
+    }
+
+    .year, .duration {
+        border-right: 1px solid #e6e6e6;
+        padding: 10px 80px 0 0;
+        min-width: 80px;
+    }
+
+    .date {
+        min-width: 80px;
+        padding: 10px 80px 0 0;
+        padding-right: 30px;
+    }
+</style>
 
 <script>
     $("#datetimepicker1").datetimepicker({
@@ -104,6 +195,41 @@
         format: 'HH:mm'
     });
 
+    function GetSeances() {
+        $.ajax({
+            url: 'https://localhost:44319/api/Seances',
+            type: 'GET',
+            contentType: "application/json",
+            success: function (seances) {
+                var rows = "";
+                seances.forEach(seances => {
+                    rows += rowSeances(seances);
+                })
+                $('#seances').append(rows);
+            }
+        });
+    }
 
+    var rowSeances = function (item) {
 
+        date = new Date(item.dateSeance);
+        year = date.getFullYear();
+        month = date.getMonth() + 1;
+        dt = date.getDate();
+
+        if (dt < 10) {
+             dt = '0' + dt;
+        }
+        if (month < 10) {
+            month = '0' + month;
+        }
+
+        var arr = ['января', 'февраля', 'марта', 'апреля', 'мая', 'июня', 'июля', 'августа', 'сентября', 'ноября', 'декабря'];
+
+        return "<tr data-rowid='" + item.id + "'><td>" +item.filmName+"</td><td>"+ item.cinemaName + "</td>" +
+            "<td>" + item.countSeats + "</td> <td>" + dt + ' ' + arr[month - 1] + ' ' + year + "</td><td>" + item.timeSeance +
+            "</td><td>" + item.price + "</td> </td>";
+    }
+
+    GetSeances();
 </script>

@@ -68,16 +68,13 @@ namespace Cinema.DAL.Repositories
         
         public void Create(Seances seance)
         {
-            //_context.Entry(seance).State = EntityState.Added;
-            //return _context.SaveChangesAsync();
             _context.Seances.Add(seance);
-            //_context.SaveChanges();
         }
 
         public void Update(Seances seance)
         {
             _context.Entry(seance).Property(c => c.Price).IsModified = true;
-            _context.SaveChanges();
+            //_context.SaveChanges();
             //return _context.SaveChanges();
         }
 
@@ -96,7 +93,7 @@ namespace Cinema.DAL.Repositories
             else
             {
                 _context.Seances.Remove(seances);
-                _context.SaveChanges();
+                //_context.SaveChanges();
             }
 
         }
