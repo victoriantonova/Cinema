@@ -115,7 +115,7 @@ namespace Cinema.SL.Services
 
         public void CreateSeance(Seances seances)
         {
-            DateTime date = DateTime.Now;
+           // DateTime date = DateTime.Now;
             var seats = _unitOfWork.Cinemas.Get(seances.IdCinema);
             if (seats.CountSeats != 0)
             {

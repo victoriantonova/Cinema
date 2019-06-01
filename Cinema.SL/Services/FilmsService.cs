@@ -28,7 +28,9 @@ namespace Cinema.SL.Services
 
             foreach (Films f in films)
             {
-                filmsVM.Add(new FilmsVM { Id = f.Id, Name = f.Name, Description = f.Description, Duration = f.Duration, Year = f.Year, Img = f.Img, DateStart = f.DateStart, DateEnd = f.DateEnd });
+                if(DateTime.Now.Date <= f.DateEnd) { 
+                    filmsVM.Add(new FilmsVM { Id = f.Id, Name = f.Name, Description = f.Description, Duration = f.Duration, Year = f.Year, Img = f.Img, DateStart = f.DateStart, DateEnd = f.DateEnd });
+                }
             }
 
             return filmsVM;
