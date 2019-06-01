@@ -66,10 +66,17 @@ namespace Cinema.SL.Services
 
         public void DeleteOrder(int id)
         {
-            var datas = unitOfWork.Orders.GetAll().Where(i => i.Id.Equals(id)).FirstOrDefault();            
-            unitOfWork.Orders.Delete(id);
-            _seanceService.SeatIncrement(datas.IdSeance);
-            _seatsBusyService.UpdateSeatBusy(datas.IdSeance, datas.IdSeat, false);
+            var datas = unitOfWork.Orders.GetAll().Where(i => i.Id.Equals(id)).FirstOrDefault();
+            var seanceId = unitOfWork.Seances.GetAll().Where(i => i.Id.Equals(datas.IdSeance)).FirstOrDefault();
+
+            if (DateTime.Now.Date < seanceId.DateSeance)
+            {
+                unitOfWork.Orders.Delete(id);
+                _seanceService.SeatIncrement(datas.IdSeance);
+                _seatsBusyService.UpdateSeatBusy(datas.IdSeance, datas.IdSeat, false);
+            }
+            else throw new Exception("Нельзя отменить бронь, сеанс прошел");
+
         }
         public void CreateOrder(Orders orders)
         {
