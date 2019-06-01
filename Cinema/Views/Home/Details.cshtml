@@ -54,27 +54,29 @@
 </table>
 
 <br />
-<h3>Сеансы</h3>
-<table id="seances" width="100" cellspacing="0" border="0" class="movie_info" cellpadding="0">
-    <tbody>
-        <tr>
-            <th>Кинотеатр</th>
-            <th>Свободные места</th>
-            <th>Дата</th>
-            <th>Время</th>
-            <th>Цена</th>
-        </tr>
-    </tbody>
-</table>
-
+<div class="form-group col-12">
+    <h3>Сеансы</h3>
+    <table id="seances" width="100" cellspacing="0" border="0" class="movie_info" cellpadding="0">
+        <tbody>
+            <tr>
+                <th>Кинотеатр</th>
+                <th>Свободные места</th>
+                <th>Дата</th>
+                <th>Время</th>
+                <th>Цена</th>
+                <th></th>
+            </tr>
+        </tbody>
+    </table>
+</div>
 
 
 @if (UserHelper.IdUser != null)
 {
-    <div name="commentForm">
+    <div class="form-group col-6" name="commentForm">
         <label>Добавить комментарий:</label><br />
-        <textarea name="comment" id="commentID"></textarea>
-        <button id="subForm">Отправить</button>
+        <textarea class="form-control rounded-0" name="comment" id="commentID"></textarea><br />
+        <button class="btn btn-info" id="subForm">Отправить</button>
     </div>
 }
 else
@@ -83,9 +85,11 @@ else
     <h4>Войдите в систему, чтобы оставлять комментарии</h4>
 }
 
-<table id="tableForComments">
-    <tbody></tbody>
-</table>
+    <div class="form-group col-6">
+        <table id="tableForComments">
+            <tbody></tbody>
+        </table>
+    </div>
 
 <style>
 
@@ -169,9 +173,9 @@ else
 <script>
     $("#subForm").on("click", function (e) {
         e.preventDefault();
+        location.reload();
         var comment = $("#commentID").val();
         var filmId = '@filmId';
-        alert(filmId);
         $.ajax({
             method: "POST",
             url: "https://localhost:44319/api/ReviewsAPI",

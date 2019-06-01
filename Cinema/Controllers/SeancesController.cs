@@ -122,23 +122,16 @@ namespace Cinema.Controllers
         [HttpPost]
         public ActionResult PostSeances([FromForm] Seances seances)
         {
-            if (seances == null)
-            {
-                return BadRequest(ModelState);
-            }
-            else
-            {
-                _seanceService.CreateSeance(seances);
-                return RedirectToAction("Index", "Moderator");
-            }
+            _seanceService.CreateSeance(seances);
+            return RedirectToAction("Index","Moderator");
         }
 
         // DELETE: api/Seances/5
         [HttpDelete("{id}")]
-        public ActionResult<Seances> DeleteSeances(int id)
+        public void DeleteSeances(int id)
         {
             _seanceService.DeleteSeance(Convert.ToInt32(id));
-            return RedirectToAction("Index","Moderator") ;
+            //return RedirectToAction("Index","Moderator") ;
         }
 
 

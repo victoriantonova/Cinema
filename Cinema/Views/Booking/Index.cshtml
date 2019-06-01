@@ -8,6 +8,17 @@
 <link href="https://stackpath.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" />
 <script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
 
+@if (UserHelper.IdUser == null)
+{
+    <div class="container-fluid">
+        <h4>Войдите в систему, чтобы забронировать место</h4>
+    </div>
+}
+else
+{
+    <h4>Щелкните по месту для бронирования</h4>
+}
+
 <div class="container-fluid">
     @for (int i = 0; i < Model.Count() / 10; i++)
     {
@@ -18,7 +29,7 @@
                 <div style="display:line; margin: 20px; flex-direction: row; flex-wrap: wrap; width: 50px; background-color: @color ">
 
                     <div class="valueDiv addclass" style=" width: 50px; height: 50px;">
-                        <input type="hidden" id=`IdSeance${@seat.IdSeatbusy}` value="@seat.IdSeance"/>
+                        <input type="hidden" id=`IdSeance${@seat.IdSeatbusy}` value="@seat.IdSeance" />
                         <button class="btn" id="@seat.IdSeatbusy" style="width:100%; height: 100%; background: transparent; border: none; color: brown;" disabled="@seat.Isbusy">@seat.IdSeatbusy</button>
                     </div>
                 </div>
@@ -48,5 +59,5 @@
             }
         });
     });
-    
+
 </script>
