@@ -17,7 +17,8 @@
 <script src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.37/js/bootstrap-datetimepicker.min.js"></script>
 
 
-<form method="post" action="https://localhost:44319/api/Seances">
+<form name="seances" method="post" action="https://localhost:44319/api/Seances" onsubmit="return validate_form();">
+    @Html.ValidationSummary(true, "", new { @style = "color:red;" })
     <div class="container">
         <div class="row">
             <div class='col-sm-6'>
@@ -32,7 +33,7 @@
     <div class="container">
         <div class="row">
             <div class='col-sm-6'>
-                <div class="form-group">
+                <div class="form-group">                    
                     <label>Выберите кинотеатр:</label><br />
                     @Html.DropDownListFor(x => x.IdCinema, ViewBag.Cinemas as SelectList, "Не выбрано")
                 </div>
@@ -188,6 +189,42 @@
 </style>
 
 <script>
+
+    function validate_form() {
+        valid = true;
+
+        if (document.seances.DateSeance.value == "") {
+            alert("Пожалуйста, заполните поле 'Дата сеанса'.");
+            valid = false;
+        }
+        if (document.seances.TimeSeance.value == "") {
+            alert("Пожалуйста, заполните поле 'Время сеанса'.");
+            valid = false;
+        }
+        if (document.seances.Price.value == "") {
+            alert("Пожалуйста, заполните поле 'Цена'.");
+            valid = false;
+        }
+        if (document.seances.Price.value.match(/^[1-9]{1}[0-9]{0,1}$/)){
+            valid = true;
+        }
+        else
+        {
+            alert("В поле 'Цена' должны находится целые числа");
+            valid = false;
+        }
+        if (document.seances.IdCinema.value == "") {
+            alert("Пожалуйста, выберите кинотеатр.");
+            valid = false;
+        }
+        if (document.seances.IdFilm.value == "") {
+            alert("Пожалуйста, выберите фильм.");
+            valid = false;
+        }
+
+        return valid;
+    }
+
     $("#datetimepicker1").datetimepicker({
         format: 'YYYY-MM-DD'
     });

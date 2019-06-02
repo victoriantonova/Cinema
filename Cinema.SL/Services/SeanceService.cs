@@ -104,6 +104,7 @@ namespace Cinema.SL.Services
             var datas = _unitOfWork.Seances.Get(entered_idseance);
             datas.Count_Seats = datas.Count_Seats - 1;
             _unitOfWork.Seances.Update(datas);
+            _unitOfWork.Save();
         }
 
         public void SeatIncrement(int entered_idseance)
@@ -111,6 +112,7 @@ namespace Cinema.SL.Services
             var datas = _unitOfWork.Seances.Get(entered_idseance);
             datas.Count_Seats = datas.Count_Seats + 1;
             _unitOfWork.Seances.Update(datas);
+            _unitOfWork.Save();
         }
 
         public void CreateSeance(Seances seances)

@@ -130,8 +130,21 @@ namespace Cinema.Controllers
         [HttpPost]
         public ActionResult PostSeances([FromForm] Seances seances)
         {
-            _seanceService.CreateSeance(seances);
-            return RedirectToAction("Index","Moderator");
+            try { 
+            if (seances.IdCinema == 0)
+            {                    
+                    throw new Exception("ex");
+            }
+            else
+            {
+                _seanceService.CreateSeance(seances);
+                return RedirectToAction("Index", "Moderator");
+            } 
+            }catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+
+            }
         }
 
         // DELETE: api/Seances/5

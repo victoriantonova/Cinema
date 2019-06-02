@@ -26,12 +26,12 @@ namespace Cinema.Controllers
         [Authorize(Roles = "Moderator")]
         public IActionResult Index()
         {
-            SelectList films = new SelectList(_filmsService.GetAll(), "Id", "Name");
-            ViewBag.Films = films;
+                SelectList films = new SelectList(_filmsService.GetAll(), "Id", "Name");
+                ViewBag.Films = films;
 
-            SelectList cinemas = new SelectList(_cinemasService.GetAll(), "Id", "Name");
-            ViewBag.Cinemas = cinemas;
-
+                SelectList cinemas = new SelectList(_cinemasService.GetAll(), "Id", "Name");
+                ViewBag.Cinemas = cinemas;
+            
             return View();
         }
     }

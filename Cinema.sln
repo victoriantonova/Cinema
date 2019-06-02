@@ -5,11 +5,13 @@ VisualStudioVersion = 15.0.28307.421
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Cinema", "Cinema\Cinema.csproj", "{86D904E7-56C2-4567-9602-6D16267E67BE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cinema.DAL", "Cinema.DAL\Cinema.DAL.csproj", "{4DE09A93-5AA6-419B-8A0E-15462666716F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Cinema.DAL", "Cinema.DAL\Cinema.DAL.csproj", "{4DE09A93-5AA6-419B-8A0E-15462666716F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cinema.SL", "Cinema.SL\Cinema.SL.csproj", "{FB67F4BF-A89F-4432-9D4F-3E36FDCE3A26}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Cinema.SL", "Cinema.SL\Cinema.SL.csproj", "{FB67F4BF-A89F-4432-9D4F-3E36FDCE3A26}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cinema.Models", "Cinema.Models\Cinema.Models.csproj", "{C5BA07E9-D474-4BC3-92CC-5CEC2979956C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Cinema.Models", "Cinema.Models\Cinema.Models.csproj", "{C5BA07E9-D474-4BC3-92CC-5CEC2979956C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XUnitTestProject", "XUnitTestProject\XUnitTestProject.csproj", "{7E85FD40-E092-4686-AF24-F6411197C2C5}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,10 @@ Global
 		{C5BA07E9-D474-4BC3-92CC-5CEC2979956C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C5BA07E9-D474-4BC3-92CC-5CEC2979956C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C5BA07E9-D474-4BC3-92CC-5CEC2979956C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7E85FD40-E092-4686-AF24-F6411197C2C5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7E85FD40-E092-4686-AF24-F6411197C2C5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7E85FD40-E092-4686-AF24-F6411197C2C5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7E85FD40-E092-4686-AF24-F6411197C2C5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
