@@ -42,21 +42,24 @@ namespace Cinema.Controllers
             var seances = _seanceService.GetAllSeances().ToList();
             foreach (Seances seance in seances)
             {
-                var cinemasinfo = _cinemasService.getCinemaofSeance(seance.IdCinema);
-                var filmsinfo = _filmsService.getFilmofSeance(seance.IdFilm);
-
-                seancei.Add(new SeanceInfo
+                if (DateTime.Now <= seance.DateSeance)
                 {
-                    SeanceId = seance.Id,
-                    CinemaId = seance.IdCinema,
-                    CinemaName = cinemasinfo.Name,
-                    FilmId = seance.IdFilm,
-                    FilmName = filmsinfo.Name,
-                    DateSeance = seance.DateSeance,
-                    TimeSeance = seance.TimeSeance,
-                    Price = seance.Price,
-                    CountSeats = seance.Count_Seats
-                });
+                    var cinemasinfo = _cinemasService.getCinemaofSeance(seance.IdCinema);
+                    var filmsinfo = _filmsService.getFilmofSeance(seance.IdFilm);
+
+                    seancei.Add(new SeanceInfo
+                    {
+                        SeanceId = seance.Id,
+                        CinemaId = seance.IdCinema,
+                        CinemaName = cinemasinfo.Name,
+                        FilmId = seance.IdFilm,
+                        FilmName = filmsinfo.Name,
+                        DateSeance = seance.DateSeance,
+                        TimeSeance = seance.TimeSeance,
+                        Price = seance.Price,
+                        CountSeats = seance.Count_Seats
+                    });
+                }
             }
             return seancei;
         }
@@ -70,21 +73,24 @@ namespace Cinema.Controllers
             var seances = _seanceService.getSeanceInfoOfIdFilm(idfilm).ToList();
             foreach (Seances seance in seances)
             {
-                var cinemasinfo = _cinemasService.getCinemaofSeance(seance.IdCinema);
-                var filmsinfo = _filmsService.getFilmofSeance(seance.IdFilm);
-                
-                seancei.Add(new SeanceInfo
+                if (DateTime.Now <= seance.DateSeance)
                 {
-                    SeanceId = seance.Id,
-                    CinemaId = seance.IdCinema,
-                    CinemaName = cinemasinfo.Name,
-                    FilmId = seance.IdFilm,
-                    FilmName = filmsinfo.Name,
-                    DateSeance = seance.DateSeance,
-                    TimeSeance = seance.TimeSeance,
-                    Price = seance.Price,
-                    CountSeats = seance.Count_Seats
-                });
+                    var cinemasinfo = _cinemasService.getCinemaofSeance(seance.IdCinema);
+                    var filmsinfo = _filmsService.getFilmofSeance(seance.IdFilm);
+
+                    seancei.Add(new SeanceInfo
+                    {
+                        SeanceId = seance.Id,
+                        CinemaId = seance.IdCinema,
+                        CinemaName = cinemasinfo.Name,
+                        FilmId = seance.IdFilm,
+                        FilmName = filmsinfo.Name,
+                        DateSeance = seance.DateSeance,
+                        TimeSeance = seance.TimeSeance,
+                        Price = seance.Price,
+                        CountSeats = seance.Count_Seats
+                    });
+                }
             }
             return seancei;
         }
