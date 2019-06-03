@@ -40,24 +40,28 @@ else
 
 <script>
     $(".btn").on("click", (e) => {
-        var body = {
-            IdSeat: e.target.id,
-            IdUser: `@UserHelper.IdUser`,
-            IdSeance: @seanceId
-        };
+        if (`@UserHelper.IdUser` == "") {
+            alert("Бронирование невозможно! Пожалуйста, войдите в систему");
+        }
+        else {
+           
+            $.ajax({
+                url: 'https://localhost:44319/api/Orders',
+                type: 'POST',
+                data: JSON.stringify({
+                    IdSeat: e.target.id,
+                    IdUser: `@UserHelper.IdUser`,
+                    IdSeance: @seanceId
+                }),
+                contentType: "application/json",
+                success: function (order) {
+                    $(`#${e.target.id}`).parent().css("background-color", "yellow");
+                },
+                error: function (data) {
 
-        $.ajax({
-            url: 'https://localhost:44319/api/Orders',
-            type: 'POST',
-            data: JSON.stringify(body),
-            contentType: "application/json",
-            success: function (order) {
-                $(`#${e.target.id}`).parent().css("background-color", "yellow");
-            },
-            error: function (data) {
-
-            }
-        });
+                }
+            });
+        }
     });
 
 </script>

@@ -7,7 +7,7 @@ namespace Cinema.SL.Services
 {
     public class EmailService : IEmailService
     {
-        public async Task SendEmailAsync(string email, string message)
+        public void SendEmailAsync(string email, string message)
         {
             MimeMessage emailMessage = new MimeMessage();
 
@@ -21,11 +21,13 @@ namespace Cinema.SL.Services
 
             using (SmtpClient client = new SmtpClient())
             {
-                await client.ConnectAsync("smtp.gmail.com", 587, false);
-                await client.AuthenticateAsync("victori.antonovav@gmail.com", "pil445439200");
-                await client.SendAsync(emailMessage);
+                client.Connect("smtp.gmail.com", 587, false);
+                client.Authenticate("victori.antonovav@gmail.com", "pil445439200");
+                //client.Connect("smtp.yandex.ru", 25, false);
+                //client.Authenticate("aliona.sauchuk@yandex.by", "qwe123.");
+                client.Send(emailMessage);
 
-                await client.DisconnectAsync(true);
+                client.Disconnect(true);
             }
         }
     }

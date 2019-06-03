@@ -45,7 +45,7 @@ namespace Cinema.Controllers
         if (ModelState.IsValid)
         {
             ApplicationUser user = _userManager.FindByEmailAsync(model.Email).Result;
-            if (user != null)
+            if (user != null && user.EmailConfirmed == true)
             {
                 await _signInManager.CreateUserPrincipalAsync(user);
                 Microsoft.AspNetCore.Identity.SignInResult result = await _signInManager.PasswordSignInAsync(user.UserName, model.Password, false, false);
@@ -97,13 +97,14 @@ namespace Cinema.Controllers
             });
             IMapper map = config.CreateMapper();
             ApplicationUser user = map.Map<ApplicationUserVM, ApplicationUser>(newUser);
+                IdentityResult result = await _userManager.CreateAsync(user, model.Password);
 
-            string rgx = @"^(?=.+[0-9])(?=.+[!@#$%^&*])(?=.+[a-z])(?=.+[A-Z])[0-9a-zA-Z!@#$%^&*]{6,}$";
+                string rgx = @"^(?=.+[0-9])(?=.+[!@#$%^&*])(?=.+[a-z])(?=.+[A-Z])[0-9a-zA-Z!@#$%^&*]{6,}$";
 
-                if (Regex.IsMatch(model.Password, rgx))
-                {
+                //if (Regex.IsMatch(model.Password, rgx))
+                //{
 
-                    IdentityResult result = await _userManager.CreateAsync(user, model.Password);
+                   // IdentityResult result = await _userManager.CreateAsync(user, model.Password);
 
                     if (result.Succeeded)
                     {
@@ -115,7 +116,7 @@ namespace Cinema.Controllers
                         await _userManager.AddToRoleAsync(user, "User");
                         SendMessage(user);
                         return PartialView("DisplayEmail");
-                    }
+                   // }
                 }
                 else
                 {
@@ -142,7 +143,7 @@ namespace Cinema.Controllers
         string callbackUrl = Url.Action("ConfirmEmail", "Account", new { email = user.Email, code }, protocol: Request.Scheme);
         try
         {
-            await _emailService.SendEmailAsync(user.Email, "Для завершения регистрации перейдите по ссылке: <a href=\"" + callbackUrl + "\"> завершить регистрацию</a>");
+            _emailService.SendEmailAsync(user.Email, "Для завершения регистрации перейдите по ссылке: <a href=\"" + callbackUrl + "\"> завершить регистрацию</a>");
         }
         catch (Exception) { }
 

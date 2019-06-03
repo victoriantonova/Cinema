@@ -90,9 +90,9 @@ namespace Cinema.SL.Services
 
         public void Create(ReviewsVM review)
         {
-            _unitOfWork.Reviews.Create(new Reviews { IdFilm = review.IdFilm, IdAuthor = review.IdAuthor, Feedback = review.Feedback, Date = review.Date });
-           // _unitOfWork.Save();
-           //восстановить !!!!
+                _unitOfWork.Reviews.Create(new Reviews { IdFilm = review.IdFilm, IdAuthor = review.IdAuthor, Feedback = review.Feedback, Date = review.Date });
+                _unitOfWork.Save();           
+         
         }
     }
 }

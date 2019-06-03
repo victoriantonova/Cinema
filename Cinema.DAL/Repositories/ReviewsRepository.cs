@@ -29,7 +29,7 @@ namespace Cinema.DAL.Repositories
         public void Create(Reviews reviews)
         {
             _context.Reviews.Add(reviews);
-            _context.SaveChanges();
+            //_context.SaveChanges();
         }
 
         public void Update(Reviews reviews)

@@ -4,6 +4,6 @@ namespace Cinema.SL.Interfaces
 {
     public interface IEmailService
     {
-        Task SendEmailAsync(string email, string message);
+        void SendEmailAsync(string email, string message);
     }
 }

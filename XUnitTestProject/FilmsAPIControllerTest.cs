@@ -44,85 +44,8 @@ namespace XUnitTestProject
             _unitOfWork.Save();
 
             _unitOfWork.ApplicationUsers.Create();
-            var user = _unitOfWork.ApplicationUsers.GetByEmail("kitty@mail.ru");
-            var user2 = _unitOfWork.ApplicationUsers.GetByEmail("victori@mail.ru");
+            var user = _unitOfWork.ApplicationUsers.GetByEmail("leshencko.nastia2013@gmail.com");
 
-            //_unitOfWork.Subcategories.Create(new Subcategory
-            //{
-            //    Id = 22,
-            //    Name = "Женская одежда",
-            //    Points = 15,
-            //    CategoryName = null,
-            //    Category = null
-            //});
-            //_unitOfWork.Save();
-            //var subcategory = _unitOfWork.Subcategories.Get(22);
-
-            //var img = new ImagesGallery
-            //{
-            //    Id = 1009,
-            //    Name = "брюки1.jpg",
-            //    PostId = 1007,
-            //    Post = null
-            //};
-            //List<ImagesGallery> imagesGalleries = new List<ImagesGallery>();
-            //imagesGalleries.Add(img);
-
-            //_unitOfWork.Save();
-
-            //_unitOfWork.Posts.Create(new Post
-            //{
-            //    Id = 1007,
-            //    Name = "Брюки",
-            //    Description = "Деловой стиль",
-            //    DateCreatePost = "11.05.2019 17:42:20",
-            //    Status = "1",
-            //    CityId = 2,
-            //    UserId = user.Id,
-            //    SubcategoryId = 22,
-            //    City = null,
-            //    User = null,
-            //    Subcategory = subcategory,
-            //    ImagesGallery = imagesGalleries
-            //});
-            //_unitOfWork.Save();
-            //_unitOfWork.Posts.Create(new Post
-            //{
-            //    Id = 1008,
-            //    Name = "Брюки1",
-            //    Description = "Деловой стиль",
-            //    DateCreatePost = "11.05.2019 17:42:20",
-            //    Status = "1",
-            //    CityId = 2,
-            //    UserId = user2.Id,
-            //    SubcategoryId = 22,
-            //    City = null,
-            //    User = null,
-            //    Subcategory = subcategory,
-            //    ImagesGallery = imagesGalleries
-            //});
-            //_unitOfWork.Save();
-            //var post = _unitOfWork.Posts.Get(1007);
-            //var post2 = _unitOfWork.Posts.Get(1008);
-
-            //_unitOfWork.Orders.Create(new Order
-            //{
-            //    Id = 4013,
-            //    PostId = post.Id,
-            //    UserId = user.Id,
-            //    Post = post,
-            //    User = user
-            //});
-            //_unitOfWork.Save();
-            //_unitOfWork.Orders.Create(new Order
-            //{
-            //    Id = 4014,
-            //    PostId = post2.Id,
-            //    UserId = user2.Id,
-            //    Post = post,
-            //    User = user
-            //});
-            //_unitOfWork.Save();
             #endregion
 
             _service = new FilmsService(_unitOfWork, _mapper);
@@ -162,7 +85,5 @@ namespace XUnitTestProject
         }
 
         #endregion
-
-
     }
 }
