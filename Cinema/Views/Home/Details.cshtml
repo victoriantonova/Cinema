@@ -176,14 +176,19 @@ else
         location.reload();
         var comment = $("#commentID").val();
         var filmId = '@filmId';
-        $.ajax({
-            method: "POST",
-            url: "https://localhost:44319/api/ReviewsAPI",
-            contentType: "application/json",
-            data: JSON.stringify({ feedback: comment, idFilm: Number(filmId), Date: new Date() }),
-            success: (data) => { },
-            error: (data) => console.log(data)
-        })
+        if (comment != 0) {
+            $.ajax({
+                method: "POST",
+                url: "https://localhost:44319/api/ReviewsAPI",
+                contentType: "application/json",
+                data: JSON.stringify({ feedback: comment, idFilm: Number(filmId), Date: new Date() }),
+                success: (data) => { },
+                error: (data) => console.log(data)
+            })
+        }
+        else {
+            alert("Пожалуйста, введите комментарий.");
+        }
     })
 
     //function validate_form() {
